@@ -1,0 +1,22 @@
+$bg-color: #f3f7fa;
+
+.app {
+    background-color: $bg-color;
+    height: 100vh;
+    padding: 25px;
+}
+
+.main {
+    max-width: 750px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.left {
+    width: 230px;
+}
+
+.right {
+  width: 500px;
+  margin-left: auto;
+}

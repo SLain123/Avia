@@ -1,0 +1,39 @@
+$border-color: #dfe5ec;
+$active-color-text: #ffff;
+$active-color-bg: #2196f3;
+
+.panel {
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid $border-color;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 15px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    background-color: #ffff;
+    border: none;
+    width: 100%;
+    border-left: 1px solid $border-color;
+    cursor: pointer;
+    opacity: .95;
+
+    &:first-child {
+        border-left: none;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.active {
+    color: $active-color-text;
+    background-color: $active-color-bg;
+}
