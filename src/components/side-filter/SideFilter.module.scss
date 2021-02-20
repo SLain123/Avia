@@ -97,3 +97,20 @@ $box-hover: #f1fcff;
         border-color: #80bdff;
     }
 }
+
+@media (max-width: 767px) {
+    .panel {
+        margin-bottom: 20px;
+    }
+
+    .title {
+        text-align: center;
+    }
+    .list {
+        margin: 0 auto;
+    }
+
+    .item {
+        width: 320px;
+    }
+}

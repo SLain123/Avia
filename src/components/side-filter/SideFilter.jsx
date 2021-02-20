@@ -5,7 +5,7 @@ import classes from './SideFilter.module.scss';
 const SideFilter = ({ filters }) => {
     const filterList = filters.map(({ lable, checked, htmlForId }) => {
         return (
-            <li key={htmlForId}>
+            <li key={htmlForId} className={classes.item}>
                 <input
                     type='checkbox'
                     htmlFor={htmlForId}

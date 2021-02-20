@@ -2,7 +2,7 @@ $bg-color: #f3f7fa;
 
 .app {
     background-color: $bg-color;
-    height: 100vh;
+    min-height: 100vh;
     padding: 25px;
 }
 
@@ -19,4 +19,25 @@ $bg-color: #f3f7fa;
 .right {
   width: 500px;
   margin-left: auto;
+}
+
+@media (max-width: 1024px) {
+    .app {
+        padding: 25px 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main {
+        flex-flow: column;
+    }
+
+    .right {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .left {
+        width: 100%;
+    }
 }
