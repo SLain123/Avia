@@ -2,24 +2,26 @@ import React from 'react';
 
 import classes from './TopFilter.module.scss';
 
-const TopFilter = () => {
-    return (
-        <div className={classes.panel}>
-            <button
-                type='button'
-                aria-label=''
-                className={`${classes.active} ${classes.btn}`}
-            >
-                Самый дешевый
-            </button>
-            <button type='button' aria-label='' className={classes.btn}>
-                Самый быстрый
-            </button>
-            <button type='button' aria-label='' className={classes.btn}>
-                Оптимальный
-            </button>
-        </div>
-    );
+const TopFilter = ({ topBtns }) => {
+    const btnList = topBtns.map(({ lable, aria, isActive }) => {
+        const iaActiveClass = isActive
+            ? `${classes.active} ${classes.btn}`
+            : classes.btn;
+
+        return (
+            <li key={lable} className={classes.item}>
+                <button
+                    type='button'
+                    aria-label={aria}
+                    className={iaActiveClass}
+                >
+                    {lable}
+                </button>
+            </li>
+        );
+    });
+
+    return <ul className={classes.panel}>{btnList}</ul>;
 };
 
 export default TopFilter;

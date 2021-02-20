@@ -3,11 +3,23 @@ $active-color-text: #ffff;
 $active-color-bg: #2196f3;
 
 .panel {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     border-radius: 5px;
     border: 1px solid $border-color;
     overflow-x: hidden;
     margin-bottom: 20px;
+}
+
+.item {
+    width: 100%;
+    border-left: 1px solid $border-color;
+
+    &:first-child {
+        border-left: none;
+    }
 }
 
 .btn {
@@ -20,13 +32,8 @@ $active-color-bg: #2196f3;
     background-color: #ffff;
     border: none;
     width: 100%;
-    border-left: 1px solid $border-color;
+    opacity: 0.95;
     cursor: pointer;
-    opacity: .95;
-
-    &:first-child {
-        border-left: none;
-    }
 
     &:hover {
         opacity: 1;

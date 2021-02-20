@@ -5,7 +5,8 @@ import classes from './TicketList.module.scss';
 
 const TicketList = ({ tickets }) => {
     const ticketList = tickets.map((ticket) => {
-        return <TicketItem {...ticket} />;
+        const { id } = ticket;
+        return <TicketItem {...ticket} key={id} />;
     });
 
     return <ul className={classes.list}>{ticketList}</ul>;
