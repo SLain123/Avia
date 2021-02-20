@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TicketItem from '../ticket-item';
 
 import classes from './TicketList.module.scss';
@@ -10,6 +11,14 @@ const TicketList = ({ tickets }) => {
     });
 
     return <ul className={classes.list}>{ticketList}</ul>;
+};
+
+TicketList.propTypes = {
+    tickets: PropTypes.arrayOf(PropTypes.object),
+};
+
+TicketList.defaultProps = {
+    tickets: [],
 };
 
 export default TicketList;

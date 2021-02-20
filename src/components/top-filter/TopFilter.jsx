@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './TopFilter.module.scss';
 
@@ -22,6 +23,14 @@ const TopFilter = ({ topBtns }) => {
     });
 
     return <ul className={classes.panel}>{btnList}</ul>;
+};
+
+TopFilter.propTypes = {
+    topBtns: PropTypes.arrayOf(PropTypes.object),
+};
+
+TopFilter.defaultProps = {
+    topBtns: [],
 };
 
 export default TopFilter;
