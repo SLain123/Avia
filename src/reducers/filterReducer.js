@@ -56,48 +56,40 @@ const checkAllBoxes = (filters, id) => {
 
 const filterReducer = (state, action) => {
     if (state === undefined) {
-        return {
-            filters: [
-                {
-                    lable: 'Все',
-                    checked: false,
-                    htmlForId: 'all',
-                },
-                {
-                    lable: 'Без пересадок',
-                    checked: false,
-                    htmlForId: 'without',
-                },
-                {
-                    lable: '1 пересадка',
-                    checked: false,
-                    htmlForId: 'one',
-                },
-                {
-                    lable: '2 пересадки',
-                    checked: false,
-                    htmlForId: 'two',
-                },
-                {
-                    lable: '3 пересадки',
-                    checked: false,
-                    htmlForId: 'three',
-                },
-            ],
-        };
+        return [
+            {
+                lable: 'Все',
+                checked: false,
+                htmlForId: 'all',
+            },
+            {
+                lable: 'Без пересадок',
+                checked: false,
+                htmlForId: 'without',
+            },
+            {
+                lable: '1 пересадка',
+                checked: false,
+                htmlForId: 'one',
+            },
+            {
+                lable: '2 пересадки',
+                checked: false,
+                htmlForId: 'two',
+            },
+            {
+                lable: '3 пересадки',
+                checked: false,
+                htmlForId: 'three',
+            },
+        ];
     }
 
     switch (action.type) {
-        case 'MAKE_ACTIVE':
-            return {
-                ...state,
-                filters: setStatusForEach(state.filters, action.id),
-            };
-        case 'CHECK_ALL':
-            return {
-                ...state,
-                filters: checkAllBoxes(state.filters, action.id),
-            };
+        case 'ACTIVATE_CHECKBOX':
+            return setStatusForEach(state, action.id);
+        case 'CHECK_ALL_CHECKBOXES':
+            return checkAllBoxes(state, action.id);
         default:
             return state;
     }

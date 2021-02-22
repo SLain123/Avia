@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { activateBox, checkBoxs } from '../../actions';
 
 import classes from './SideFilter.module.scss';
 
@@ -9,8 +9,8 @@ const SideFilter = () => {
     const filters = useSelector((state) => state.filters);
 
     const makeActive = (evt) => {
-        dispatch({ type: 'MAKE_ACTIVE', id: evt.target.id });
-        dispatch({ type: 'CHECK_ALL', id: evt.target.id });
+        dispatch(activateBox(evt.target.id));
+        dispatch(checkBoxs(evt.target.id));
     };
 
     const filterList = filters.map(({ lable, checked, htmlForId }) => (

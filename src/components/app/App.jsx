@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Header from '../header';
 import SideFilter from '../side-filter';
-import TopFilter from '../top-filter';
+import TabFilter from '../tab-filter';
 import TicketList from '../ticket-list';
 import DownloadBtn from '../download-btn';
 
@@ -33,24 +33,6 @@ function App() {
         },
     ]);
 
-    const [topBtns, setTopBtns] = useState([
-        {
-            lable: 'Самый дешевый',
-            aria: 'Получит список самых дешевых билетов',
-            isActive: true,
-        },
-        {
-            lable: 'Самый быстрый',
-            aria: 'Получит список самых быстрых перелетов',
-            isActive: false,
-        },
-        {
-            lable: 'Оптимальный',
-            aria: 'Получит список оптимального соотношения цены и скорости',
-            isActive: false,
-        },
-    ]);
-
     return (
         <section className={classes.app}>
             <Header />
@@ -59,7 +41,7 @@ function App() {
                     <SideFilter />
                 </div>
                 <div className={classes.right}>
-                    <TopFilter topBtns={topBtns} />
+                    <TabFilter />
                     <TicketList tickets={tickets} />
                     <DownloadBtn />
                 </div>

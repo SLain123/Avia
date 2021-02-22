@@ -1,3 +1,7 @@
-import filterReducer from './filterRducer';
+import { combineReducers } from 'redux';
+import filterReducer from './filterReducer';
+import tabReducer from './tabReducer';
 
-export default filterReducer;
+const rootReducer = combineReducers({ filters: filterReducer, tabs: tabReducer });
+
+export default rootReducer;
