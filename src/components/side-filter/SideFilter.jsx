@@ -1,18 +1,28 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './SideFilter.module.scss';
 
-const SideFilter = ({ filters }) => {
+const SideFilter = () => {
+    const dispatch = useDispatch();
+    const filters = useSelector((state) => state.filters);
+
+    const makeActive = (evt) => {
+        dispatch({ type: 'MAKE_ACTIVE', id: evt.target.id });
+        dispatch({ type: 'CHECK_ALL', id: evt.target.id });
+    };
+
     const filterList = filters.map(({ lable, checked, htmlForId }) => (
         <li key={htmlForId} className={classes.item}>
             <input
                 type='checkbox'
-                htmlFor={htmlForId}
+                id={htmlForId}
                 className={classes.checkbox}
-                defaultChecked={checked}
+                checked={checked}
+                onChange={makeActive}
             />
-            <label className={classes.lable} id={htmlForId}>
+            <label className={classes.lable} htmlFor={htmlForId}>
                 {lable}
             </label>
         </li>
@@ -24,14 +34,6 @@ const SideFilter = ({ filters }) => {
             <ul className={classes.list}>{filterList}</ul>
         </div>
     );
-};
-
-SideFilter.propTypes = {
-    filters: PropTypes.arrayOf(PropTypes.object),
-};
-
-SideFilter.defaultProps = {
-    filters: [],
 };
 
 export default SideFilter;
