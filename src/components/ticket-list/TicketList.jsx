@@ -11,16 +11,17 @@ const TicketList = () => {
     const onLoad = useSelector((state) => state.tickets.onLoad);
     const onFail = useSelector((state) => state.tickets.onFail);
     const tickets = useSelector((state) => state.tickets.ticketList);
+    const howTickets = useSelector((state) => state.tickets.howTickets);
 
     if (onLoad) {
         return <Spinner />;
     }
 
-    if (onFail > 3) {
+    if (onFail > 4) {
         return <ErrorMessage />;
     }
 
-    const ticketList = tickets.slice(0, 3).map((ticket) => {
+    const ticketList = tickets.slice(0, howTickets).map((ticket) => {
         const { carrier, price } = ticket;
 
         return <TicketItem {...ticket} key={`${carrier}-${price}`} />;

@@ -18,3 +18,5 @@ export const failDownload = () => ({ type: 'FAIL_DOWNLOAD_TICKETS' });
 export const doubleFailDownload = () => ({ type: 'REPEATED_FAIL_DOWNLOAD' });
 
 export const completeFail = () => ({ type: 'COMPLETE_FAIL' });
+
+export const addFiveTickets = () => ({ type: 'ADD_FIVE_TICKETS' });

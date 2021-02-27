@@ -2,6 +2,7 @@ const ticketsReducer = (state, action) => {
     if (state === undefined) {
         return {
             ticketList: [],
+            howTickets: 5,
             searchId: null,
             onLoad: true,
             onFail: false,
@@ -22,6 +23,8 @@ const ticketsReducer = (state, action) => {
             return { ...state, onLoad: false };
         case 'ADD_SEARCH_ID':
             return { ...state, searchId: action.id };
+        case 'ADD_FIVE_TICKETS':
+            return { ...state, howTickets: state.howTickets + 5 };
         default:
             return state;
     }

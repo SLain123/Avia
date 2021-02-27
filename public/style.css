@@ -1,14 +1,10 @@
 body {
     margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
     font-family: 'openSans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
-    overflow-x: hidden;
-}
-
-button {
-    font-family: 'openSans', 'Helvetica Neue', sans-serif;
 }
 
 @font-face {

@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tickets from '../../services/tickets-service';
 import {
@@ -32,7 +31,7 @@ function App() {
                 }
             })
             .catch(() => {
-                if (onFail > 3) {
+                if (onFail > 4) {
                     dispatch(completeFail());
                 } else {
                     dispatch(failDownload());

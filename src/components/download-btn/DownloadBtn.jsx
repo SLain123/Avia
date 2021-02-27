@@ -1,15 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addFiveTickets } from '../../actions';
 
 import classes from './DownloadBtn.module.scss';
 
-const DownloadBtn = () => (
-    <button
-        type='button'
-        aria-label='Загрузить дополнительные билеты'
-        className={classes.btn}
-    >
-        Показать еще 5 билетов!
-    </button>
-);
+const DownloadBtn = () => {
+    const dispatch = useDispatch();
+    return (
+        <button
+            type='button'
+            aria-label='Загрузить дополнительные билеты'
+            className={classes.btn}
+            onClick={() => dispatch(addFiveTickets())}
+        >
+            Показать еще 5 билетов!
+        </button>
+    );
+};
 
 export default DownloadBtn;
