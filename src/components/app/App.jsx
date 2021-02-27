@@ -1,37 +1,54 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Tickets from '../../services/tickets-service';
+import {
+    addSearchId,
+    addTickets,
+    failDownload,
+    completeDownload,
+    completeFail,
+} from '../../actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
 import TabFilter from '../tab-filter';
 import TicketList from '../ticket-list';
-import DownloadBtn from '../download-btn';
 
 import classes from './App.module.scss';
 
 function App() {
-    const [tickets, setTickets] = useState([
-        {
-            id: 1,
-            cost: '13 400',
-            route: '10:45 - 11-00',
-            length: '2 hours',
-            stops: 'NU',
-        },
-        {
-            id: 2,
-            cost: '13 400',
-            route: '10:45 - 11-00',
-            length: '2 hours',
-            stops: 'NU',
-        },
-        {
-            id: 3,
-            cost: '13 400',
-            route: '10:45 - 11-00',
-            length: '2 hours',
-            stops: 'NU',
-        },
-    ]);
+    const dispatch = useDispatch();
+    const searchId = useSelector((state) => state.tickets.searchId);
+    const onFail = useSelector((state) => state.tickets.onFail);
+
+    const downloadAllTickets = useCallback(() => {
+        Tickets.getTickets(searchId)
+            .then(({ tickets, stop }) => {
+                dispatch(addTickets(tickets));
+                if (stop) {
+                    dispatch(completeDownload());
+                } else {
+                    downloadAllTickets();
+                }
+            })
+            .catch(() => {
+                if (onFail > 3) {
+                    dispatch(completeFail());
+                } else {
+                    dispatch(failDownload());
+                }
+            });
+    }, [searchId, dispatch, onFail]);
+
+    useEffect(() => {
+        Tickets.getSearchId().then((id) => dispatch(addSearchId(id)));
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (searchId !== null) {
+            downloadAllTickets();
+        }
+    }, [searchId, downloadAllTickets]);
 
     return (
         <section className={classes.app}>
@@ -42,8 +59,7 @@ function App() {
                 </div>
                 <div className={classes.right}>
                     <TabFilter />
-                    <TicketList tickets={tickets} />
-                    <DownloadBtn />
+                    <TicketList />
                 </div>
             </div>
         </section>

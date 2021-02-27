@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    font-family: 'openSans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+button {
+    font-family: 'openSans', 'Helvetica Neue', sans-serif;
+}
+
+@font-face {
+    font-family: 'openSans';
+    src: url('./fonts/OpenSans-Regular.woff2') format('woff2');
+    src: url('./fonts/OpenSans-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'openSans';
+    src: url('./fonts/OpenSans-SemiBold.woff2') format('woff2');
+    src: url('./fonts/OpenSans-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
