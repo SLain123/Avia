@@ -7,6 +7,7 @@ import {
     failDownload,
     completeDownload,
     completeFail,
+    changeSort,
 } from '../../actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
@@ -18,6 +19,7 @@ import classes from './App.module.scss';
 function App() {
     const dispatch = useDispatch();
     const searchId = useSelector((state) => state.tickets.searchId);
+    const onLoad = useSelector((state) => state.tickets.onLoad);
     const onFail = useSelector((state) => state.tickets.onFail);
 
     const downloadAllTickets = useCallback(() => {
@@ -44,10 +46,18 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (searchId !== null) {
-            downloadAllTickets();
-        }
+        setTimeout(() => {
+            if (searchId !== null) {
+                downloadAllTickets();
+            }
+        }, 1000);
     }, [searchId, downloadAllTickets]);
+
+    useEffect(() => {
+        if (!onLoad) {
+            dispatch(changeSort('cheap'));
+        }
+    }, [dispatch, onLoad]);
 
     return (
         <section className={classes.app}>

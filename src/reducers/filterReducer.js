@@ -59,27 +59,27 @@ const filterReducer = (state, action) => {
         return [
             {
                 lable: 'Все',
-                checked: false,
+                checked: true,
                 htmlForId: 'all',
             },
             {
                 lable: 'Без пересадок',
-                checked: false,
+                checked: true,
                 htmlForId: 'without',
             },
             {
                 lable: '1 пересадка',
-                checked: false,
+                checked: true,
                 htmlForId: 'one',
             },
             {
                 lable: '2 пересадки',
-                checked: false,
+                checked: true,
                 htmlForId: 'two',
             },
             {
                 lable: '3 пересадки',
-                checked: false,
+                checked: true,
                 htmlForId: 'three',
             },
         ];

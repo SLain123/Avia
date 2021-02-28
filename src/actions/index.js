@@ -20,3 +20,5 @@ export const doubleFailDownload = () => ({ type: 'REPEATED_FAIL_DOWNLOAD' });
 export const completeFail = () => ({ type: 'COMPLETE_FAIL' });
 
 export const addFiveTickets = () => ({ type: 'ADD_FIVE_TICKETS' });
+
+export const changeSort = (value) => ({ type: 'CHANGE_SORT_VALUE', value });

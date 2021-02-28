@@ -4,20 +4,24 @@ import TicketItem from '../ticket-item';
 import DownloadBtn from '../download-btn';
 import Spinner from '../spinner';
 import ErrorMessage from '../error-message';
+import LoadString from '../load-string';
 
 import classes from './TicketList.module.scss';
 
 const TicketList = () => {
     const onLoad = useSelector((state) => state.tickets.onLoad);
     const onFail = useSelector((state) => state.tickets.onFail);
-    const tickets = useSelector((state) => state.tickets.ticketList);
+    const onComplite = useSelector((state) => state.tickets.onComplite);
+    const tickets = useSelector((state) => state.tickets.filtredList);
     const howTickets = useSelector((state) => state.tickets.howTickets);
 
-    if (onLoad) {
+    const loadString = !onComplite ? <LoadString /> : null;
+
+    if (onLoad || tickets.length === 0) {
         return <Spinner />;
     }
 
-    if (onFail > 4) {
+    if (onFail > 4 && tickets.length === 0) {
         return <ErrorMessage />;
     }
 
@@ -29,6 +33,7 @@ const TicketList = () => {
 
     return (
         <>
+            {loadString}
             <ul className={classes.list}>{ticketList}</ul>
             <DownloadBtn />
         </>

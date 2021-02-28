@@ -1,0 +1,27 @@
+@keyframes load {
+    0% {
+        opacity: 0.08;
+        font-size: 10px;
+        filter: blur(5px);
+        letter-spacing: 3px;
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.animate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    font-size: 20px;
+    animation: load 1s infinite 0s ease-in-out;
+    animation-direction: alternate;
+    text-shadow: 0 0 1px white;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 15px;
+    color: #2c9bf3;
+}
