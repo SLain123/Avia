@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { uniqueId } from 'lodash';
 import TicketItem from '../ticket-item';
 import DownloadBtn from '../download-btn';
 import Spinner from '../spinner';
@@ -17,7 +18,7 @@ const TicketList = () => {
 
     const loadString = !onComplite ? <LoadString /> : null;
 
-    if (onLoad || tickets.length === 0) {
+    if (onLoad && tickets.length === 0) {
         return <Spinner />;
     }
 
@@ -25,11 +26,19 @@ const TicketList = () => {
         return <ErrorMessage />;
     }
 
-    const ticketList = tickets.slice(0, howTickets).map((ticket) => {
-        const { carrier, price } = ticket;
+    if (tickets.length === 0) {
+        return (
+            <p className={classes.null}>
+                Рейсов, подходящих под заданные фильтры, не найдено
+            </p>
+        );
+    }
 
-        return <TicketItem {...ticket} key={`${carrier}-${price}`} />;
-    });
+    const ticketList = tickets
+        .slice(0, howTickets)
+        .map((ticket) => (
+            <TicketItem {...ticket} key={`${uniqueId('ticket_')}`} />
+        ));
 
     return (
         <>

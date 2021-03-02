@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const sortTickets = (ticketList, sort) =>
     ticketList
         .slice()
@@ -24,6 +23,31 @@ const sortTickets = (ticketList, sort) =>
                 );
             },
         );
+
+const performFiltering = (ticketList, filterList) => {
+    const resultList = [];
+
+    if (filterList[0] === 'all') {
+        return ticketList;
+    }
+
+    filterList.forEach((filter) => {
+        const newList = ticketList.filter((ticket) => {
+            const { segments } = ticket;
+            if (
+                segments[0].stops.length === filter ||
+                segments[1].stops.length === filter
+            ) {
+                return true;
+            }
+            return false;
+        });
+
+        resultList.push(...newList);
+    });
+
+    return resultList;
+};
 
 const ticketsReducer = (state, action) => {
     if (state === undefined) {
@@ -56,11 +80,26 @@ const ticketsReducer = (state, action) => {
             return { ...state, searchId: action.id };
         case 'ADD_FIVE_TICKETS':
             return { ...state, howTickets: state.howTickets + 5 };
-        case 'CHANGE_SORT_VALUE':
+        case 'PERFORM_FIRST_SORT':
             return {
                 ...state,
                 filtredList: sortTickets(state.ticketList, action.value),
             };
+        case 'PERFORM_SORT':
+            return {
+                ...state,
+                filtredList: sortTickets(state.filtredList, action.value),
+                sort: action.value,
+            };
+        case 'PERFORM_FILTERING': {
+            return {
+                ...state,
+                filtredList: sortTickets(
+                    performFiltering(state.ticketList, action.filters),
+                    state.sort,
+                ),
+            };
+        }
         default:
             return state;
     }

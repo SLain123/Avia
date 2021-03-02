@@ -7,7 +7,8 @@ import {
     failDownload,
     completeDownload,
     completeFail,
-    changeSort,
+    performFirstSort,
+    performFiltering,
 } from '../../actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
@@ -21,6 +22,7 @@ function App() {
     const searchId = useSelector((state) => state.tickets.searchId);
     const onLoad = useSelector((state) => state.tickets.onLoad);
     const onFail = useSelector((state) => state.tickets.onFail);
+    const filters = useSelector((state) => state.filters.filterList);
 
     const downloadAllTickets = useCallback(() => {
         Tickets.getTickets(searchId)
@@ -55,9 +57,13 @@ function App() {
 
     useEffect(() => {
         if (!onLoad) {
-            dispatch(changeSort('cheap'));
+            dispatch(performFirstSort('cheap'));
         }
     }, [dispatch, onLoad]);
+
+    useEffect(() => {
+        dispatch(performFiltering(filters));
+    }, [filters, dispatch]);
 
     return (
         <section className={classes.app}>

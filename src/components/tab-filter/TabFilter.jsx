@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateBtn, changeSort } from '../../actions';
+import { activateBtn, performSort } from '../../actions';
 
 import classes from './TabFilter.module.scss';
 
@@ -10,7 +10,7 @@ const TabFilter = () => {
 
     const makeActive = (evt) => {
         dispatch(activateBtn(evt.target.id));
-        dispatch(changeSort(evt.target.id));
+        dispatch(performSort(evt.target.id));
     };
 
     const btnList = tabs.map(({ lable, aria, isActive, id }) => {

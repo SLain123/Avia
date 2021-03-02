@@ -1,95 +1,125 @@
-const setStatusToMain = (filters, status) =>
-    filters.map((filter) => {
-        if (filter.htmlForId === 'all') {
+const setStatusToMain = (checkboxes, status) =>
+    checkboxes.map((checkbox) => {
+        if (checkbox.htmlForId === 'all') {
             return {
-                ...filter,
+                ...checkbox,
                 checked: status,
             };
         }
-        return filter;
+        return checkbox;
     });
 
-const setStatusForEach = (filters, id) => {
+const setStatusForEach = (checkboxes, id) => {
     if (id === 'all') {
-        const currentStatus = !filters[0].checked;
-        const newFilters = filters.map((filter) => ({
-            ...filter,
+        const currentStatus = !checkboxes[0].checked;
+        const newFilters = checkboxes.map((checkbox) => ({
+            ...checkbox,
             checked: currentStatus,
         }));
         return newFilters;
     }
 
-    const newFilters = filters.map((filter) => {
-        if (filter.htmlForId === id) {
-            const currentStatus = filter.checked;
+    const newFilters = checkboxes.map((checkbox) => {
+        if (checkbox.htmlForId === id) {
+            const currentStatus = checkbox.checked;
             return {
-                ...filter,
+                ...checkbox,
                 checked: !currentStatus,
             };
         }
-        return filter;
+        return checkbox;
     });
 
     return newFilters;
 };
 
-const checkAllBoxes = (filters, id) => {
+const checkAllBoxes = (checkboxes, id) => {
     if (id === 'all') {
-        return filters;
+        return checkboxes;
     }
 
     let withoutMain = true;
-    filters.forEach((filter, indx) => {
+    checkboxes.forEach((checkbox, indx) => {
         if (indx === 0) {
             return;
         }
-        if (!filter.checked) {
+        if (!checkbox.checked) {
             withoutMain = false;
         }
     });
 
     if (withoutMain) {
-        return setStatusToMain(filters, true);
+        return setStatusToMain(checkboxes, true);
     }
-    return setStatusToMain(filters, false);
+    return setStatusToMain(checkboxes, false);
+};
+
+const getActiveBoxList = (checkboxes) => {
+    const result = [];
+    checkboxes.forEach(({ checked, filter }) => {
+        if (checked) {
+            result.push(filter);
+        }
+    });
+
+    return result;
 };
 
 const filterReducer = (state, action) => {
     if (state === undefined) {
-        return [
-            {
-                lable: 'Все',
-                checked: true,
-                htmlForId: 'all',
-            },
-            {
-                lable: 'Без пересадок',
-                checked: true,
-                htmlForId: 'without',
-            },
-            {
-                lable: '1 пересадка',
-                checked: true,
-                htmlForId: 'one',
-            },
-            {
-                lable: '2 пересадки',
-                checked: true,
-                htmlForId: 'two',
-            },
-            {
-                lable: '3 пересадки',
-                checked: true,
-                htmlForId: 'three',
-            },
-        ];
+        return {
+            filterList: ['all'],
+            checkboxes: [
+                {
+                    lable: 'Все',
+                    checked: true,
+                    htmlForId: 'all',
+                    filter: 'all',
+                },
+                {
+                    lable: 'Без пересадок',
+                    checked: true,
+                    htmlForId: 'without',
+                    filter: 0,
+                },
+                {
+                    lable: '1 пересадка',
+                    checked: true,
+                    htmlForId: 'one',
+                    filter: 1,
+                },
+                {
+                    lable: '2 пересадки',
+                    checked: true,
+                    htmlForId: 'two',
+                    filter: 2,
+                },
+                {
+                    lable: '3 пересадки',
+                    checked: true,
+                    htmlForId: 'three',
+                    filter: 3,
+                },
+            ],
+        };
     }
 
     switch (action.type) {
         case 'ACTIVATE_CHECKBOX':
-            return setStatusForEach(state, action.id);
+            return {
+                ...state,
+                checkboxes: setStatusForEach(state.checkboxes, action.id),
+            };
         case 'CHECK_ALL_CHECKBOXES':
-            return checkAllBoxes(state, action.id);
+            return {
+                ...state,
+                checkboxes: checkAllBoxes(state.checkboxes, action.id),
+            };
+        case 'GET_ACTIVE_CHECKBOX_LIST':
+            return {
+                ...state,
+                filterList: getActiveBoxList(state.checkboxes),
+            };
         default:
             return state;
     }

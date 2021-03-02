@@ -10,5 +10,3 @@ const Header = () => (
 );
 
 export default Header;
-
-// className={classes.logo}

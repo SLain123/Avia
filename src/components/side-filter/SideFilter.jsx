@@ -1,19 +1,24 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateBox, checkBoxs } from '../../actions';
+import {
+    activateBox,
+    checkBoxes,
+    getActiveCheckboxesList,
+} from '../../actions';
 
 import classes from './SideFilter.module.scss';
 
 const SideFilter = () => {
     const dispatch = useDispatch();
-    const filters = useSelector((state) => state.filters);
+    const checkboxes = useSelector((state) => state.filters.checkboxes);
 
     const makeActive = (evt) => {
         dispatch(activateBox(evt.target.id));
-        dispatch(checkBoxs(evt.target.id));
+        dispatch(checkBoxes(evt.target.id));
+        dispatch(getActiveCheckboxesList());
     };
 
-    const filterList = filters.map(({ lable, checked, htmlForId }) => (
+    const filterList = checkboxes.map(({ lable, checked, htmlForId }) => (
         <li key={htmlForId} className={classes.item}>
             <input
                 type='checkbox'
