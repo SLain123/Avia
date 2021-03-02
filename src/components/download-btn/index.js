@@ -1,3 +1,3 @@
-import DownloadBtn from './DownloadBtn';
+import DownloadBtn from "./DownloadBtn";
 
 export default DownloadBtn;

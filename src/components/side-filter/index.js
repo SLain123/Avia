@@ -1,3 +1,3 @@
-import SideFilter from './SideFilter';
+import SideFilter from "./SideFilter";
 
 export default SideFilter;

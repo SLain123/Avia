@@ -2,6 +2,6 @@ import React from 'react';
 
 import classes from './LoadString.module.scss';
 
-const LoadString = () => <h2 className={classes.animate}>загрузка</h2>;
+const LoadString = () => <p className={classes.animate}>загрузка</p>;
 
 export default LoadString;

@@ -1,10 +1,10 @@
 class Request {
-    static getRequest = async (url) => {
-        const request = await fetch(url);
-        const result = await request.json();
+  static getRequest = async (url) => {
+    const request = await fetch(url);
+    const result = await request.json();
 
-        return result;
-    };
+    return result;
+  };
 }
 
 export default Request;

@@ -1,3 +1,3 @@
-import LoadString from './LoadString';
+import LoadString from "./LoadString";
 
 export default LoadString;
