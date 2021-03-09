@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import activateBtn from '../../reducers/tabReducer/actions';
-import { performSort } from '../../reducers/ticketsReducer/actions';
+import {
+    performSort,
+    changeSortValue,
+} from '../../reducers/ticketsReducer/actions';
 
 import classes from './TabFilter.module.scss';
 
@@ -11,7 +14,8 @@ const TabFilter = () => {
 
     const makeActive = (evt) => {
         dispatch(activateBtn(evt.target.id));
-        dispatch(performSort(evt.target.id));
+        dispatch(changeSortValue(evt.target.id));
+        dispatch(performSort());
     };
 
     const btnList = tabs.map(({ lable, aria, isActive, id }) => {

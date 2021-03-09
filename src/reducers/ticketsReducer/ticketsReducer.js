@@ -9,6 +9,7 @@ const initState = {
     onFail: false,
     onComplite: false,
     sort: 'cheap',
+    filters: ['all'],
 };
 
 const ticketsReducer = (state = initState, action) => {
@@ -29,26 +30,23 @@ const ticketsReducer = (state = initState, action) => {
             return { ...state, searchId: action.id };
         case 'ADD_FIVE_TICKETS':
             return { ...state, howTickets: state.howTickets + 5 };
-        case 'PERFORM_FIRST_SORT':
-            return {
-                ...state,
-                filtredList: sortTickets(state.ticketList, action.value),
-            };
         case 'PERFORM_SORT':
             return {
                 ...state,
-                filtredList: sortTickets(state.filtredList, action.value),
-                sort: action.value,
+                filtredList: sortTickets(state.ticketList, state.sort),
             };
-        case 'PERFORM_FILTERING': {
+        case 'CHANGE_SORT_VALUE':
+            return { ...state, sort: action.value };
+        case 'PERFORM_FILTERING':
             return {
                 ...state,
                 filtredList: sortTickets(
-                    performFiltering(state.ticketList, action.filters),
+                    performFiltering(state.ticketList, state.filters),
                     state.sort,
                 ),
             };
-        }
+        case 'CHANGE_FILTER_VALUE':
+            return { ...state, filters: action.value };
         default:
             return state;
     }

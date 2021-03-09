@@ -7,8 +7,8 @@ import {
     failDownload,
     completeDownload,
     completeFail,
-    performFirstSort,
     performFiltering,
+    changeFilterValue,
 } from '../../reducers/ticketsReducer/actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
@@ -20,7 +20,6 @@ import classes from './App.module.scss';
 function App() {
     const dispatch = useDispatch();
     const searchId = useSelector((state) => state.tickets.searchId);
-    const onLoad = useSelector((state) => state.tickets.onLoad);
     const onFail = useSelector((state) => state.tickets.onFail);
     const filters = useSelector((state) => state.filters.filterList);
 
@@ -28,6 +27,7 @@ function App() {
         Tickets.getTickets(searchId)
             .then(({ tickets, stop }) => {
                 dispatch(addTickets(tickets));
+                dispatch(performFiltering());
                 if (stop) {
                     dispatch(completeDownload());
                 } else {
@@ -56,13 +56,8 @@ function App() {
     }, [searchId, downloadAllTickets]);
 
     useEffect(() => {
-        if (!onLoad) {
-            dispatch(performFirstSort('cheap'));
-        }
-    }, [dispatch, onLoad]);
-
-    useEffect(() => {
-        dispatch(performFiltering(filters));
+        dispatch(changeFilterValue(filters));
+        dispatch(performFiltering());
     }, [filters, dispatch]);
 
     return (
