@@ -4,7 +4,7 @@ import {
     activateBox,
     checkBoxes,
     getActiveCheckboxesList,
-} from '../../actions';
+} from '../../reducers/filterReducer/actions';
 
 import classes from './SideFilter.module.scss';
 

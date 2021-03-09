@@ -9,7 +9,7 @@ import {
     completeFail,
     performFirstSort,
     performFiltering,
-} from '../../actions';
+} from '../../reducers/ticketsReducer/actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
 import TabFilter from '../tab-filter';

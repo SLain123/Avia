@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addFiveTickets } from '../../actions';
+import { addFiveTickets } from '../../reducers/ticketsReducer/actions';
 
 import classes from './DownloadBtn.module.scss';
 

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import filterReducer from "./filterReducer";
-import tabReducer from "./tabReducer";
-import ticketsReducer from "./ticketsReducer";
+import filterReducer from "./filterReducer/filterReducer";
+import tabReducer from "./tabReducer/tabReducer";
+import ticketsReducer from "./ticketsReducer/ticketsReducer";
 
 const rootReducer = combineReducers({
   filters: filterReducer,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { activateBtn, performSort } from '../../actions';
+import activateBtn from '../../reducers/tabReducer/actions';
+import { performSort } from '../../reducers/ticketsReducer/actions';
 
 import classes from './TabFilter.module.scss';
 
