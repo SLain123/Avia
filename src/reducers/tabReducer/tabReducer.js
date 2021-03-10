@@ -22,7 +22,7 @@ const initState = [
 const tabReducer = (state = initState, action) => {
     switch (action.type) {
         case 'ACTIVATE_BTN':
-            return action.result;
+            return action.tabs;
         default:
             return state;
     }

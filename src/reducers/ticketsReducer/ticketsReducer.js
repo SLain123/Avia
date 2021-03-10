@@ -33,7 +33,7 @@ const ticketsReducer = (state = initState, action) => {
         case 'PERFORM_FILTERING':
             return {
                 ...state,
-                filtredList: action.result,
+                filtredList: action.filtredList,
             };
         default:
             return state;

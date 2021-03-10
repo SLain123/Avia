@@ -39,8 +39,8 @@ const filterReducer = (state = initState, action) => {
         case 'ACTIVATE_CHECKBOX':
             return {
                 ...state,
-                checkboxes: action.checkboxesResult,
-                filterList: action.filterListResult,
+                checkboxes: action.checkboxes,
+                filterList: action.filterList,
             };
         default:
             return state;

@@ -16,6 +16,57 @@ import TicketList from '../ticket-list';
 
 import classes from './App.module.scss';
 
+const sortTickets = (ticketList, sort) =>
+    ticketList
+        .slice()
+        .sort(
+            (
+                { price: firstPrice, segments: firstSegments },
+                { price: secondPrice, segments: secondSegments },
+            ) => {
+                const firstDuration =
+                    firstSegments[0].duration + firstSegments[1].duration;
+                const secondDuration =
+                    secondSegments[0].duration + secondSegments[1].duration;
+                if (sort === 'cheap') {
+                    return firstPrice - secondPrice;
+                }
+                if (sort === 'speed') {
+                    return firstDuration - secondDuration;
+                }
+                return (
+                    firstDuration * 50 +
+                    firstPrice -
+                    (secondDuration * 50 + secondPrice)
+                );
+            },
+        );
+
+const filterTickets = (ticketList, filterList) => {
+    const resultList = [];
+
+    if (filterList[0] === 'all') {
+        return ticketList;
+    }
+
+    filterList.forEach((filter) => {
+        const newList = ticketList.filter((ticket) => {
+            const { segments } = ticket;
+            if (
+                segments[0].stops.length === filter ||
+                segments[1].stops.length === filter
+            ) {
+                return true;
+            }
+            return false;
+        });
+
+        resultList.push(...newList);
+    });
+
+    return resultList;
+};
+
 function App() {
     const dispatch = useDispatch();
     const searchId = useSelector((state) => state.tickets.searchId);
@@ -56,7 +107,9 @@ function App() {
     }, [searchId, downloadAllTickets]);
 
     useEffect(() => {
-        dispatch(performFiltering(ticketList, filters, sort));
+        const result = sortTickets(filterTickets(ticketList, filters), sort);
+
+        dispatch(performFiltering(result));
     }, [filters, dispatch, ticketList, sort]);
 
     return (

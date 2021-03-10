@@ -5,12 +5,26 @@ import { changeSortValue } from '../../reducers/ticketsReducer/actions';
 
 import classes from './TabFilter.module.scss';
 
+const makeActiveBtn = (tabs, id) =>
+    tabs.map((tab) => {
+        if (tab.id === id) {
+            return {
+                ...tab,
+                isActive: true,
+            };
+        }
+        return {
+            ...tab,
+            isActive: false,
+        };
+    });
+
 const TabFilter = () => {
     const dispatch = useDispatch();
     const tabs = useSelector((state) => state.tabs);
 
     const makeActive = (evt) => {
-        dispatch(activateBtn(tabs, evt.target.id));
+        dispatch(activateBtn(makeActiveBtn(tabs, evt.target.id)));
         dispatch(changeSortValue(evt.target.id));
     };
 
