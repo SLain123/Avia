@@ -1,9 +1,3 @@
-import {
-    setStatusForEach,
-    checkAllBoxes,
-    getActiveBoxList,
-} from './funcForReducer';
-
 const initState = {
     filterList: ['all'],
     checkboxes: [
@@ -45,17 +39,8 @@ const filterReducer = (state = initState, action) => {
         case 'ACTIVATE_CHECKBOX':
             return {
                 ...state,
-                checkboxes: setStatusForEach(state.checkboxes, action.id),
-            };
-        case 'CHECK_ALL_CHECKBOXES':
-            return {
-                ...state,
-                checkboxes: checkAllBoxes(state.checkboxes, action.id),
-            };
-        case 'GET_ACTIVE_CHECKBOX_LIST':
-            return {
-                ...state,
-                filterList: getActiveBoxList(state.checkboxes),
+                checkboxes: action.checkboxesResult,
+                filterList: action.filterListResult,
             };
         default:
             return state;

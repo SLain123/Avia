@@ -8,7 +8,6 @@ import {
     completeDownload,
     completeFail,
     performFiltering,
-    changeFilterValue,
 } from '../../reducers/ticketsReducer/actions';
 import Header from '../header';
 import SideFilter from '../side-filter';
@@ -22,12 +21,13 @@ function App() {
     const searchId = useSelector((state) => state.tickets.searchId);
     const onFail = useSelector((state) => state.tickets.onFail);
     const filters = useSelector((state) => state.filters.filterList);
+    const ticketList = useSelector((state) => state.tickets.ticketList);
+    const sort = useSelector((state) => state.tickets.sort);
 
     const downloadAllTickets = useCallback(() => {
         Tickets.getTickets(searchId)
             .then(({ tickets, stop }) => {
                 dispatch(addTickets(tickets));
-                dispatch(performFiltering());
                 if (stop) {
                     dispatch(completeDownload());
                 } else {
@@ -56,9 +56,8 @@ function App() {
     }, [searchId, downloadAllTickets]);
 
     useEffect(() => {
-        dispatch(changeFilterValue(filters));
-        dispatch(performFiltering());
-    }, [filters, dispatch]);
+        dispatch(performFiltering(ticketList, filters, sort));
+    }, [filters, dispatch, ticketList, sort]);
 
     return (
         <section className={classes.app}>

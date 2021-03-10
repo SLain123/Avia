@@ -26,4 +26,4 @@ Runs eslint with fix.
 
 Runs prettier with formating code.
 
-Build project: https://avia-rho.vercel.app/
+Build project: https://avia-slain123.vercel.app/

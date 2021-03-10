@@ -1,5 +1,3 @@
-import makeActiveBtn from './funcForReducer';
-
 const initState = [
     {
         lable: 'Самый дешевый',
@@ -24,7 +22,7 @@ const initState = [
 const tabReducer = (state = initState, action) => {
     switch (action.type) {
         case 'ACTIVATE_BTN':
-            return makeActiveBtn(state, action.id);
+            return action.result;
         default:
             return state;
     }

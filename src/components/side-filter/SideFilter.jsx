@@ -1,10 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    activateBox,
-    checkBoxes,
-    getActiveCheckboxesList,
-} from '../../reducers/filterReducer/actions';
+import activateBox from '../../reducers/filterReducer/actions';
 
 import classes from './SideFilter.module.scss';
 
@@ -13,9 +9,7 @@ const SideFilter = () => {
     const checkboxes = useSelector((state) => state.filters.checkboxes);
 
     const makeActive = (evt) => {
-        dispatch(activateBox(evt.target.id));
-        dispatch(checkBoxes(evt.target.id));
-        dispatch(getActiveCheckboxesList());
+        dispatch(activateBox(checkboxes, evt.target.id));
     };
 
     const filterList = checkboxes.map(({ lable, checked, htmlForId }) => (

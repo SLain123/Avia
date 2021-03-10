@@ -1,5 +1,3 @@
-import { sortTickets, performFiltering } from './funcForReducer';
-
 const initState = {
     ticketList: [],
     filtredList: [],
@@ -30,23 +28,13 @@ const ticketsReducer = (state = initState, action) => {
             return { ...state, searchId: action.id };
         case 'ADD_FIVE_TICKETS':
             return { ...state, howTickets: state.howTickets + 5 };
-        case 'PERFORM_SORT':
-            return {
-                ...state,
-                filtredList: sortTickets(state.ticketList, state.sort),
-            };
         case 'CHANGE_SORT_VALUE':
             return { ...state, sort: action.value };
         case 'PERFORM_FILTERING':
             return {
                 ...state,
-                filtredList: sortTickets(
-                    performFiltering(state.ticketList, state.filters),
-                    state.sort,
-                ),
+                filtredList: action.result,
             };
-        case 'CHANGE_FILTER_VALUE':
-            return { ...state, filters: action.value };
         default:
             return state;
     }
